@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('m_supplier', function (Blueprint $table) {
-        $table->id('supplier_id');
-        $table->string('supplier_nama');
-        $table->string('supplier_alamat');
+    Schema::create('t_penjualan', function (Blueprint $table) {
+        $table->id('penjualan_id');
+        $table->unsignedBigInteger('user_id');
+        $table->date('tanggal');
+        $table->integer('total_harga');
         $table->timestamps();
+
+        $table->foreign('user_id')->references('user_id')->on('m_user');
     });
     }
 
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('m_supplier');
+        Schema::dropIfExists('t_penjualann');
     }
 };
